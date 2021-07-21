@@ -15,6 +15,28 @@ cd C:\kafka_2.13-2.8.0\bin
 .\windows\kafka-server-start.bat ..\config\server.properties
 ```
 
+Common commands:
+- List of topics;
+```
+.\windows\kafka-topics.bat --list --bootstrap-server localhost:9092
+```
+- Create the topic;
+```
+.\windows\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
+```
+- Change the number of partitions;
+```
+.\windows\kafka-topics.bat --zookeeper localhost:2181 --alter --topic test --partitions 2
+```
+- See the topic's description;
+```
+.\windows\kafka-topics.bat --describe --zookeeper localhost:2181 --topic test
+```
+- Delete the topic (if you set delete.topic.enable to true in config/server.properties);
+```
+.\windows\kafka-topics.bat --zookeeper localhost:2181 --delete --topic test
+```
+
 ## Step 2
 Generate an SSL certificate in a keystore.
 Open other terminal.
