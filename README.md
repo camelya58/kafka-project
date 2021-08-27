@@ -75,6 +75,21 @@ Enter key password for <tomcat>
     (RETURN if same as keystore password):
 ```
 
+To avoid getting the Exception "PKIX path building failed: SunCertPathBuilderException: unable to find valid certification path to requested target"
+you need to save your self-signed certificate to java cacerts.
+
+Use the following command to check the list of certificates in the keystore:
+```
+keytool -list -v -keystore "%JAVA_HOME%\lib\security\cacerts"  > java_cacerts.txt
+Enter keystore password:  changeit
+```
+Back in the browser, export the certificate. Choose the "X.509 (.CER) encoding (DER)" type, so the exported file has a cer extension.
+
+Assuming the file is called example.cer, pick the alias ‘tomcat’ for this certificate. Next import the file.
+```
+keytool -import -alias tomcat -keystore "%JAVA_HOME%\lib\security\cacerts" -file example.cer
+```
+
 ## Step 3
 Add dependencies.
 ```xml
